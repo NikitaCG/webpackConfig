@@ -1,0 +1,10 @@
+@import 'colors';
+
+.title {
+  color: $red;
+
+  &_bigFont {
+    font-size: 25px;
+    border: 1px solid $myGreen;
+  }
+}
