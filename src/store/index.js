@@ -12,13 +12,13 @@ const AppStore = (middl) => {
 		composeWithDevTools(applyMiddleware(thunk, middl, createLogger())),
 	);
 
-	// // если сборщик поддерживает hot-reload то пробуем подгрузить нужные redusers
-	// if (module.hot) {
-	// 	module.hot.accept('../reducers', () => {
-	// 		const nextReducer = require('../reducers').default;
-	// 		store.replaceReducer(nextReducer);
-	// 	});
-	// }
+	// если сборщик поддерживает hot-reload то пробуем подгрузить нужные redusers
+	if (module.hot) {
+		module.hot.accept('../reducers', () => {
+			const nextReducer = require('../reducers').default;
+			store.replaceReducer(nextReducer);
+		});
+	}
 
 	return store;
 };

@@ -1,26 +1,35 @@
+// @flow
 import React from 'react';
-import classNames from 'classnames/bind';
-import styles from '../../styles/main.scss';
-import exampleStyles from '../../styles/expample.scss';
 
-const mainStyles = classNames.bind(styles);
-const examp = classNames.bind(exampleStyles);
+import Template from '../../Components/Template/index';
 
-const style = mainStyles(
-	'title',
-	'title_bigFont',
-);
+type State = {
+	open: boolean,
+}
 
-const exam = examp(
-	'title_positionCenter',
-);
 
-class App extends React.Component {
+class App extends React.Component<null, State> {
+	constructor(props) {
+    	super(props);
+
+		this.state = {
+			open: false,
+		};
+	}
+
+
+	onChangeOpen = () => {
+		this.setState({
+			open: !this.state.open,
+		});
+	};
+
 	render() {
 		return (
-			<div className={`${style} ${exam}` }>
-                hello world!!!!!
-			</div>
+			<Template
+				open={this.state.open}
+				onChangeOpen={this.onChangeOpen}
+			/>
 		);
 	}
 }
