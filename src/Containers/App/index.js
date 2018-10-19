@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import classNames from 'classnames/bind';
 import styles from '../../styles/main.scss';
 import exampleStyles from '../../styles/expample.scss';
@@ -20,11 +19,10 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className={`${style} ${exam}` }>
-                hello world
+                hello world!!!!!
 			</div>
 		);
 	}
 }
 
 export default App;
-
