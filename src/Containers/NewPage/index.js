@@ -1,17 +1,39 @@
 // @flow
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import connect from 'react-redux/es/connect/connect';
+import { bindActionCreators } from 'redux';
+import * as filmsActions from '../../actions/filmsActions';
+
+type Props ={
+	films: Object,
+    actions: Object,
+    loadComedy: Function,
+    loadCriminal: Function,
+}
 
 type State = {
     name: string,
+	films: Array,
 }
 
-class NewPage extends React.Component<null, State> {
+class NewPage extends React.Component<Props, State> {
 	constructor(props) {
 		super(props);
 		this.state = {
 			name: '',
+			films: [],
 		};
+	}
+
+	static getDerivedStateFromProps(nextProps, prevState) {
+		if (nextProps.films && nextProps.films.data) {
+			return {
+				films: nextProps.films.data.films,
+			};
+		}
+
+		return null;
 	}
 
     onChangeName = (e) => {
@@ -20,7 +42,11 @@ class NewPage extends React.Component<null, State> {
     	});
     };
 
+
     render() {
+    	console.log('state', this.state);
+    	// console.log('actions', filmsActions);
+    	console.log('props', this.props);
     	return (
     		<div>
     			<input
@@ -28,12 +54,45 @@ class NewPage extends React.Component<null, State> {
     				value={this.state.name}
     				onChange={this.onChangeName}
     			/>
+    			<button
+    				onClick={this.props.loadComedy}
+    			>
+					load comedy
+    			</button>
+    			<button
+    				onClick={this.props.loadCriminal}
+    			>
+                    load criminal
+    			</button>
     			<Link to='/' >
                     back
     			</Link>
+    			{
+    				this.state.films
+						&& <div>
+							{this.state.films.map((item, index) => <div key={index}>
+								{item}
+							</div>)}
+						</div>
+    			}
+
     		</div>
     	);
     }
 }
 
-export default NewPage;
+const mapStateToProps = state => ({
+	films: state.filmsReducer,
+});
+
+const mapDispatchProps = dispatch => ({
+	// actions: bindActionCreators(filmsActions, dispatch),
+
+	loadComedy: () => filmsActions.loadComedy(dispatch),
+	loadCriminal: () => filmsActions.loadCriminal(dispatch),
+});
+
+export default connect(
+	mapStateToProps,
+	mapDispatchProps,
+)(NewPage);

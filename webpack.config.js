@@ -8,6 +8,7 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: '[name].[hash].js',
+		publicPath: '/',
 	},
 	module: {
 		rules: [
@@ -52,6 +53,7 @@ module.exports = {
 	devServer: {
 		// contentBase: path.join(__dirname, 'dist'),
 		// compress: true,
+		historyApiFallback: true,
 		hot: true,
 		port: 1717,
 	},
