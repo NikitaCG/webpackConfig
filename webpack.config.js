@@ -4,12 +4,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-	entry: { main: './src/index.js' },
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: '[name].[hash].js',
-		publicPath: '/',
-	},
+	// entry: { main: './src/index.js' },
+	// output: {
+	// 	path: path.resolve(__dirname, 'dist'),
+	// 	filename: '[name].[hash].js',
+	// 	publicPath: '/',
+	// },
+	devtool: 'cheap-module-source-map',
 	module: {
 		rules: [
 			{
