@@ -7,9 +7,10 @@ import * as filmsActions from '../../actions/filmsActions';
 
 type Props ={
 	films: Object,
-    actions: Object,
-    loadComedy: Function,
-    loadCriminal: Function,
+        loadComedy: Function,
+        loadCriminal: Function,
+
+
 }
 
 type State = {
