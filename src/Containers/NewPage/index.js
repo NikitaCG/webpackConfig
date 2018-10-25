@@ -27,8 +27,19 @@ class NewPage extends React.Component<Props, State> {
 		};
 	}
 
+	componentDidMount() {
+		const dataFilms = sessionStorage.films ? JSON.parse(sessionStorage.films) : '';
+		if (sessionStorage.films) {
+			this.setState({
+				films: dataFilms.films,
+			});
+		}
+	}
+
 	static getDerivedStateFromProps(nextProps, prevState) {
 		if (nextProps.films && nextProps.films.data) {
+			sessionStorage.films = JSON.stringify(nextProps.films.data);
+
 			return {
 				films: nextProps.films.data.films,
 			};
