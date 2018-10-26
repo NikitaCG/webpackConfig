@@ -40,6 +40,12 @@ class NewPage extends React.Component<Props, State> {
 		if (nextProps.films && nextProps.films.data) {
 			sessionStorage.films = JSON.stringify(nextProps.films.data);
 
+			if (prevState.name) {
+				return {
+					films: nextProps.films.data.films.filter(item => item.includes(prevState.name)),
+				};
+			}
+
 			return {
 				films: nextProps.films.data.films,
 			};
