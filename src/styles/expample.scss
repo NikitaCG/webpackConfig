@@ -2,3 +2,10 @@
   display: flex;
   justify-content: center;
 }
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+  justify-content: space-around;
+}

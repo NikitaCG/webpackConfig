@@ -10,6 +10,7 @@ module.exports = {
 	// 	filename: '[name].[hash].js',
 	// 	publicPath: '/',
 	// },
+	watch: true,
 	devtool: 'cheap-module-source-map',
 	module: {
 		rules: [

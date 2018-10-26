@@ -1,0 +1,51 @@
+@import './colors';
+@import "./styleConstant";
+
+.grid__container {
+  display: grid;
+  height: calc(100vh - ( 2 * #{$gapHeight}));
+  grid-template-columns: 20% auto 20%;
+  grid-template-rows: 10% auto 10%;
+  grid-gap: $gapHeight ;
+  grid-template-areas:
+          "header header header "
+          ". main main  "
+          "footer footer footer ";
+  justify-items: center;
+  align-items: center;
+}
+
+.grid__header {
+  width: 100%;
+  height: 100%;
+  grid-area: header;
+  border: 1px solid $myBlue;
+
+  &Link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: $link;
+    background-color: $myBlue;
+    text-decoration: none;
+  }
+}
+
+.grid__main {
+  grid-area: main;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border: 1px solid $red;
+}
+
+.grid__footer {
+  width: 100%;
+  height: 100%;
+  grid-area: footer;
+  border: 1px solid $myGreen;
+}

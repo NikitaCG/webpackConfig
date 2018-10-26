@@ -27,7 +27,7 @@ type Props = {
 class Template extends React.Component<Props> {
 	render() {
 		return (
-			<div>
+			<div className={exampleStyles.main}>
 				<button
 					onClick={this.props.onChangeOpen}
 				>
@@ -42,6 +42,9 @@ class Template extends React.Component<Props> {
 				}
 				<Link to='/new' >
                     go
+				</Link>
+				<Link to='/grid' >
+                    grid
 				</Link>
 
 			</div>
