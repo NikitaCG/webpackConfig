@@ -17,7 +17,9 @@ class Grid extends React.Component {
 
 				</div>
 				<div className={gridScss.grid__main}>
-                    olol
+					<div className={gridScss.grid__mainBody}>
+						ololo
+					</div>
 				</div>
 				<div className={gridScss.grid__footer}>
                     footer

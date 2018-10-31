@@ -2,8 +2,11 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import connect from 'react-redux/es/connect/connect';
+import io from 'socket.io-client';
 import { bindActionCreators } from 'redux';
 import * as filmsActions from '../../actions/filmsActions';
+
+const socketUrl = 'ws://echo.websocket.org/';
 
 type Props ={
 	films: Object,
@@ -24,10 +27,29 @@ class NewPage extends React.Component<Props, State> {
 		this.state = {
 			name: '',
 			films: [],
+			socket: null,
+			user: null,
 		};
 	}
 
+
+	initSocket = () => {
+		const socket = io.connect(socketUrl);
+		socket.on('connect', () => {
+			console.log('Connected');
+		});
+		this.setState({ socket });
+	};
+
+	// setUser = (user) => {
+	// 	let { socket } = this.state.socket;
+	//
+	// 	socket.emit()
+	// }
+
 	componentDidMount() {
+		// this.initSocket();
+
 		const dataFilms = sessionStorage.films ? JSON.parse(sessionStorage.films) : '';
 		if (sessionStorage.films) {
 			this.setState({
@@ -62,9 +84,9 @@ class NewPage extends React.Component<Props, State> {
 
 
     render() {
-    	console.log('state', this.state);
+    	// console.log('state', this.state);
     	// console.log('actions', filmsActions);
-    	console.log('props', this.props);
+    	// console.log('props', this.props);
     	return (
     		<div>
     			<input
