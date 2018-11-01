@@ -5,20 +5,22 @@ import connect from 'react-redux/es/connect/connect';
 import io from 'socket.io-client';
 import { bindActionCreators } from 'redux';
 import * as filmsActions from '../../actions/filmsActions';
+import * as socketActions from '../../actions/socketActions';
 
-const socketUrl = 'ws://echo.websocket.org/';
+const socketUrl = 'http://localhost:9006';
 
 type Props ={
+	socket: Object,
 	films: Object,
         loadComedy: Function,
         loadCriminal: Function,
-
-
+        loadTime: Function,
 }
 
 type State = {
     name: string,
 	films: Array,
+	time:string,
 }
 
 class NewPage extends React.Component<Props, State> {
@@ -28,24 +30,31 @@ class NewPage extends React.Component<Props, State> {
 			name: '',
 			films: [],
 			socket: null,
-			user: null,
+			time: '',
 		};
 	}
 
 
 	initSocket = () => {
 		const socket = io.connect(socketUrl);
-		socket.on('connect', () => {
-			console.log('Connected');
+		socket.on('time', (data) => {
+			this.props.loadTime(data);
 		});
 		this.setState({ socket });
 	};
+
+	disconnectSocket = () => {
+		let socket = this.state.socket;
+
+		socket.disconnect();
+	}
 
 	// setUser = (user) => {
 	// 	let { socket } = this.state.socket;
 	//
 	// 	socket.emit()
 	// }
+
 
 	componentDidMount() {
 		// this.initSocket();
@@ -59,6 +68,12 @@ class NewPage extends React.Component<Props, State> {
 	}
 
 	static getDerivedStateFromProps(nextProps, prevState) {
+		if (nextProps.socket !== prevState.time) {
+			return {
+				time: nextProps.socket.toString(),
+			};
+		}
+
 		if (nextProps.films && nextProps.films.data) {
 			sessionStorage.films = JSON.stringify(nextProps.films.data);
 
@@ -84,11 +99,21 @@ class NewPage extends React.Component<Props, State> {
 
 
     render() {
-    	// console.log('state', this.state);
+    	console.log('state', this.state.time);
     	// console.log('actions', filmsActions);
-    	// console.log('props', this.props);
+    	console.log('props', this.props);
     	return (
     		<div>
+    			{ this.state.time}
+    			<p>
+    				<button onClick={this.initSocket}>
+						init socket
+    				</button>
+    			</p><p>
+    				<button onClick={this.disconnectSocket}>
+						disconnect socket
+    				</button>
+    			</p>
     			<input
     				type='text'
     				value={this.state.name}
@@ -123,11 +148,12 @@ class NewPage extends React.Component<Props, State> {
 
 const mapStateToProps = state => ({
 	films: state.filmsReducer,
+	socket: state.socketDataReducer,
 });
 
 const mapDispatchProps = dispatch => ({
 	// actions: bindActionCreators(filmsActions, dispatch),
-
+	loadTime: data => socketActions.socketTime(dispatch, data),
 	loadComedy: () => filmsActions.loadComedy(dispatch),
 	loadCriminal: () => filmsActions.loadCriminal(dispatch),
 });

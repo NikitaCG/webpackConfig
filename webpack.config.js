@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 
@@ -71,5 +72,6 @@ module.exports = {
 			chunkFilename: '[id].[hash].css',
 		}),
 		new webpack.HotModuleReplacementPlugin(),
+		new CleanWebpackPlugin(['dist']),
 	],
 };
