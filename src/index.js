@@ -3,6 +3,10 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
+// import 'bootstrap';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'jquery/dist/jquery.min';
+// import './styles/main.scss';
 import AppStore from './store/index';
 import Routing from './routes';
 

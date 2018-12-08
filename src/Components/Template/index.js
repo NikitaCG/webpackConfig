@@ -27,7 +27,7 @@ type Props = {
 class Template extends React.Component<Props> {
 	render() {
 		return (
-			<div className={exampleStyles.main}>
+			<div className={` ${exampleStyles.main}`}>
 				<button
 					onClick={this.props.onChangeOpen}
 				>

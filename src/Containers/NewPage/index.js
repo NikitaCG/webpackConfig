@@ -103,7 +103,7 @@ class NewPage extends React.Component<Props, State> {
     	// console.log('actions', filmsActions);
     	console.log('props', this.props);
     	return (
-    		<div>
+    		<div className='col-md-8'>
     			{ this.state.time}
     			<p>
     				<button onClick={this.initSocket}>
